@@ -13,17 +13,17 @@ module.exports = {
   },
 
   extends: [
+    'eslint:recommended',
+    'plugin:vue/essential',
+    '@nuxtjs/eslint-config-typescript',
     'plugin:@typescript-eslint/recommended',
     'plugin:nuxt/recommended',
     'plugin:vue/vue3-recommended',
     'plugin:prettier/recommended',
     'prettier',
-    'prettier/vue',
   ],
 
-  plugins: ['@typescript-eslint'],
+  plugins: ['vue', '@typescript-eslint'],
 
-  rules: {
-    'vue/script-setup-no-uses-vars': 'off',
-  },
+  rules: {},
 }
