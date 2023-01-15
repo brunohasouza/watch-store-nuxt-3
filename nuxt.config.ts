@@ -6,4 +6,6 @@ export default defineNuxtConfig({
   vite: {
     plugins: [eslintPlugin()],
   },
+  plugins: ['~~/plugins/mirage'],
+  components: false,
 })
