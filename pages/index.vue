@@ -31,8 +31,8 @@
 
   const productList = computed<Product[]>(() => {
     if (keywords.value.trim()) {
-      return products.value.filter(
-        ({ title }: Product) => title.indexOf(keywords.value) > -1
+      return products.value.filter(({ title }: Product) =>
+        title.includes(keywords.value)
       )
     }
     return products.value
