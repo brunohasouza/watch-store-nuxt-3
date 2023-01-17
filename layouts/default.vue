@@ -92,7 +92,6 @@
             >
           </div>
         </nav>
-        <SearchBar />
       </div>
     </header>
     <!-- <CartContainer /> -->
@@ -110,6 +109,4 @@
   </div>
 </template>
 
-<script setup lang="ts">
-  import SearchBar from '~~/components/SearchBar/SearchBar.vue'
-</script>
+<script setup lang="ts"></script>
