@@ -76,4 +76,35 @@ describe('ProductList - integration', () => {
       'Problemas ao carregar a lista de produtos'
     )
   })
+
+  test('should filter the product list when a search is performed', async () => {
+    const products = [
+      ...server.createList('product', 10),
+      server.create('product', {
+        //@ts-ignore
+        title: 'Meu relógio amado',
+      }),
+      server.create('product', {
+        //@ts-ignore
+        title: 'Meu relógio amado 2',
+      }),
+    ]
+
+    axiosGet.mockResolvedValueOnce({ data: { products } })
+
+    const wrapper = makeSut()
+
+    await flushPromises()
+
+    const searchElement = wrapper.findComponent(SearchBar)
+
+    searchElement.find('input[type="search"]').setValue('relógio')
+    await searchElement.find('form').trigger('submit')
+
+    const cards = wrapper.findAllComponents(ProductCard)
+
+    //@ts-ignore
+    expect(wrapper.vm.keywords).toEqual('relógio')
+    expect(cards).toHaveLength(2)
+  })
 })
