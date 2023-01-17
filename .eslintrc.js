@@ -28,5 +28,6 @@ module.exports = {
   rules: {
     'vue/multi-word-component-names': 'off',
     'vue/no-multiple-template-root': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
   },
 }

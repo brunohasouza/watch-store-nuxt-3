@@ -94,7 +94,7 @@
         </nav>
       </div>
     </header>
-    <!-- <CartContainer /> -->
+    <CartContainer />
     <slot></slot>
     <footer class="bg-gray-200">
       <div
@@ -109,4 +109,6 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  import CartContainer from '~~/components/CartContainer.vue'
+</script>

@@ -1,7 +1,6 @@
 import { flushPromises, mount, VueWrapper } from '@vue/test-utils'
-import ProductList from './index.vue'
-import ProductCard from '~~/components/ProductCard/ProductCard.vue'
-import SearchBar from '~~/components/SearchBar/SearchBar.vue'
+import axios from 'axios'
+import { faker } from '@faker-js/faker'
 import {
   afterEach,
   beforeEach,
@@ -11,10 +10,12 @@ import {
   vi,
   SpyInstance,
 } from 'vitest'
-import { startMirage } from '~~/mirage'
-import axios from 'axios'
 import { Instantiate, Server } from 'miragejs'
 import { AnyRegistry } from 'miragejs/-types'
+import ProductList from './index.vue'
+import ProductCard from '~~/components/ProductCard/ProductCard.vue'
+import SearchBar from '~~/components/SearchBar/SearchBar.vue'
+import { startMirage } from '~~/mirage'
 
 let server: Server
 
@@ -29,13 +30,13 @@ const mountSut = async (reject = false): Promise<SutType> => {
   const products = [
     ...server.createList('product', 10),
     server.create('product', {
-      //@ts-ignore
+      // @ts-ignore
       title: 'Meu relógio amado',
     }),
   ]
 
   if (reject) {
-    axiosGet.mockRejectedValueOnce(new Error(''))
+    axiosGet.mockRejectedValueOnce(new Error(faker.random.words()))
   } else {
     axiosGet.mockResolvedValueOnce({ data: { products } })
   }
@@ -103,7 +104,7 @@ describe('ProductList - integration', () => {
 
     const cards = wrapper.findAllComponents(ProductCard)
 
-    //@ts-ignore
+    // @ts-ignore
     expect(wrapper.vm.keywords).toEqual('relógio')
     expect(cards).toHaveLength(1)
   })
@@ -121,7 +122,7 @@ describe('ProductList - integration', () => {
 
     const cards = wrapper.findAllComponents(ProductCard)
 
-    //@ts-ignore
+    // @ts-ignore
     expect(wrapper.vm.keywords).toEqual('')
     expect(cards).toHaveLength(11)
   })
