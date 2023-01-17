@@ -18,6 +18,7 @@
 </template>
 
 <script setup lang="ts">
+  import { ref, onMounted } from 'vue'
   import axios from 'axios'
   import { Product } from '~~/entities'
   import ProductCard from '~~/components/ProductCard/ProductCard.vue'
@@ -30,7 +31,7 @@
       const response = await axios.get('/api/products')
       products.value = response.data.products as Product[]
     } catch (error) {
-      errorMessage.value = 'Problemas ao carregar produtos'
+      errorMessage.value = 'Problemas ao carregar a lista de produtos'
     }
   })
 </script>
