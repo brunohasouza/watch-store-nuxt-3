@@ -2,16 +2,16 @@
   <div class="flex justify-between mt-6">
     <div class="flex">
       <img
+        :src="product.image"
+        :alt="product.title"
         class="h-20 w-20 object-cover rounded"
-        src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80"
-        alt=""
       />
       <div class="mx-3">
         <h3 class="text-sm text-gray-600">{{ product.title }}</h3>
         <div class="flex items-center mt-2">
           <button
-            ref="decreaseBtn"
             class="text-gray-500 focus:outline-none focus:text-gray-600"
+            ref="decreaseBtn"
             :disabled="quantity <= 0"
             @click="decreaseQuantity"
           >
@@ -31,8 +31,8 @@
             quantity
           }}</span>
           <button
-            ref="increaseBtn"
             class="text-gray-500 focus:outline-none focus:text-gray-600"
+            ref="increaseBtn"
             @click="increaseQuantity"
           >
             <svg

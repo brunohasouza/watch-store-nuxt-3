@@ -97,7 +97,11 @@
         </nav>
       </div>
     </header>
-    <CartContainer :is-open="isCartOpen" @close="toggleCart" />
+    <CartContainer
+      :products="cartStore.items"
+      :is-open="cartStore.open"
+      @close="toggleCart"
+    />
     <slot></slot>
     <footer class="bg-gray-200">
       <div
@@ -113,12 +117,12 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
   import CartContainer from '~~/components/CartContainer/CartContainer.vue'
+  import { useCartStore } from '~~/stores'
 
-  const isCartOpen = ref(false)
+  const cartStore = useCartStore()
 
   function toggleCart() {
-    isCartOpen.value = !isCartOpen.value
+    cartStore.toggleCart()
   }
 </script>

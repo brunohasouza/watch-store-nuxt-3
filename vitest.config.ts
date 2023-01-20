@@ -12,5 +12,8 @@ export default {
   },
   test: {
     environment: 'happy-dom',
+    coverage: {
+      exclude: ['mirage/**'],
+    },
   },
 }

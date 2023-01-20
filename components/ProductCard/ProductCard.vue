@@ -32,19 +32,17 @@
 
 <script setup lang="ts">
   import { Product } from '~~/entities'
+  import { useCartStore } from '~~/stores'
 
   type Props = {
     product: Product
   }
 
-  type Emits = {
-    (e: 'addToCart', product: Product): void
-  }
-
-  const emit = defineEmits<Emits>()
+  const cartStore = useCartStore()
   const props = defineProps<Props>()
 
   function addToCart() {
-    emit('addToCart', props.product)
+    cartStore.openCart()
+    cartStore.addItem(props.product)
   }
 </script>
