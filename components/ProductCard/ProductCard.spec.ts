@@ -1,9 +1,11 @@
 import { afterEach, beforeEach, describe, expect, test } from 'vitest'
 import { mount, VueWrapper } from '@vue/test-utils'
-import ProductCard from './ProductCard.vue'
-import { startMirage } from '~~/mirage'
 import { Server } from 'miragejs'
 import { AnyRegistry, Instantiate } from 'miragejs/-types'
+import { createPinia, setActivePinia } from 'pinia'
+import { startMirage } from '~~/mirage'
+import { useCartStore } from '~~/stores'
+import ProductCard from './ProductCard.vue'
 
 let server: Server
 
@@ -26,6 +28,7 @@ const makeSut = (): SutTypes => {
 describe('ProductCard', () => {
   beforeEach(() => {
     server = startMirage({ environment: 'test' })
+    setActivePinia(createPinia())
   })
 
   afterEach(() => server.shutdown())
@@ -35,15 +38,13 @@ describe('ProductCard', () => {
     expect(wrapper.vm).toBeDefined()
   })
 
-  test('should emit the event addToCart with product object', async () => {
-    const { wrapper, product } = makeSut()
-
+  test('should add item to cartState on button click', async () => {
+    const { wrapper } = makeSut()
+    const cartStore = useCartStore()
     await wrapper.find('button').trigger('click')
 
-    const addToCart = wrapper.emitted().addToCart
-
-    expect(addToCart).toBeTruthy()
-    expect(addToCart.length).toBe(1)
-    expect(addToCart[0]).toEqual([product])
+    expect(cartStore.items).toHaveLength(1)
   })
+
+  test.todo('should ensure product is not added to the cart twice')
 })

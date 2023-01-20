@@ -1,6 +1,7 @@
 import { flushPromises, mount, VueWrapper } from '@vue/test-utils'
 import axios from 'axios'
 import { faker } from '@faker-js/faker'
+import { createPinia, setActivePinia } from 'pinia'
 import {
   afterEach,
   beforeEach,
@@ -55,6 +56,7 @@ const mountSut = async (reject = false): Promise<SutType> => {
 describe('ProductList - integration', () => {
   beforeEach(() => {
     server = startMirage({ environment: 'test' })
+    setActivePinia(createPinia())
   })
 
   afterEach(() => {

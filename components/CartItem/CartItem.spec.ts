@@ -2,9 +2,8 @@ import { mount, VueWrapper } from '@vue/test-utils'
 import { afterEach, beforeEach, describe, expect, test } from 'vitest'
 import CartItem from './CartItem.vue'
 import { startMirage } from '~~/mirage'
-import { Instantiate, Server } from 'miragejs'
+import { Server } from 'miragejs'
 import { faker } from '@faker-js/faker'
-import { AnyRegistry } from 'miragejs/-types'
 import { Product } from '~~/entities'
 
 let server: Server
